@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ---
 title: "Ejemplo 1"
 author: "Ana Solís García"
@@ -60,3 +61,13 @@ solH2
 ```
 
 Para alfa = 0.7, la alternativa óptima sería d4 (pondría una pastelería)
+
+```{r}
+Intervalo= Hurwicz.intervalos(tb01, favorable = T)
+```
+
+
+```{r}
+Intervalo
+```
+
