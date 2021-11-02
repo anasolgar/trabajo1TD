@@ -245,7 +245,7 @@ Hurwicz.intervalos = function(tabla, favorable = TRUE){
   y0=y0-0.1*rg;y1=y1+0.1*rg;
   plot(c(x0,x1), c(y0,y1), type = "n", xlab = "alpha", ylab = "Criterio Hurwicz");
   nn = length(Altmin);
-  colores = rep("blue",nn)
+  colores = rainbow(nn) #aquí es donde estaba el fallo, por lo que salían todas las lineas azules.
   abline(v=0);
   abline(v=1);
   if (favorable) {
@@ -266,8 +266,10 @@ Hurwicz.intervalos = function(tabla, favorable = TRUE){
   abline(v = alfaCorte, col="red")
   
   if (favorable) {
+    legend("bottomright",legend=rownames(X),fill=colores,inset=0.05) #leyendas añadidas
     title("Criterio de Hurwicz (favorable - línea discontinua)")
   } else {
+    legend("topright",legend=rownames(X),fill=colores,inset=0.05) #leyendas añadidas
     title("Criterio de Hurwicz (desfavorable - línea discontinua)")
   }
   
