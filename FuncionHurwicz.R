@@ -234,6 +234,7 @@ Hurwicz.intervalos = function(tabla, favorable = TRUE){
       alfaC = uniroot(pCorte, interval = c(0,1))$root[[1]] # Buscamos los 0 para cada funcion
       alfaCorte[i] = alfaC  # Almacenamos los valores de alfa para los que las rectas se cortan en alfaCorte
     }
+    print(paste("El valores de alfa que determina los intervalos dónde cambian las alternativas óptimas es:",alfaCorte[i]))
     
   }
   
