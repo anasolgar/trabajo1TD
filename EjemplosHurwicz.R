@@ -61,6 +61,7 @@
 # En este caso, el agricultor aumentará el precio de CADA verdura en 1,5 euro/Kg (para hacer frente a los costes de riego de las plantas).
 # ¿Qué semilla plantará el agricultor para maximizar las ganancias?
 
+======
 
 # Ejercicio 4 (Fernando)
 
