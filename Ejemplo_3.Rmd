@@ -1,0 +1,75 @@
+---
+title: "Ejemplo 3"
+author: "Luca Riccardi"
+date: "11/2/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+source("FuncionHurwicz.R")
+```
+
+# Ejemplo 3
+
+## Enunciado
+
+Un agricoltor tiene que elegir cuál semilla plantear entre tomate, patata y zanahoria. Los precios de ventea son respectivamente:
+
+-   $5€/Kg$
+
+-   $8€/kg$
+
+-   $2€/Kg$
+
+Los costes de preparación de la tierra y de las semilla son:
+
+-   $190€$ para el tomate
+
+-   $300€$ para las verduras que crecen bajo tierra (patata y zanahorias)
+
+Sabiendo que el campo se siembra de manera diferente según la hortaliza (es necesario emplear $200 m^2$ por el tomate, $300 m^2$ por las patatas y $250 m^2$ por la zanahoria) y que, a diferencia de las condiciones climáticas, se pueden cosechar distintas cantidades de hortalizas:
+
+1 - Clima cálido y húmedo con lluvias frecuentes, con el que se puede recogir $200Kg$ de tomates, $100Kg$ de patatas y $500Kg$ de zanahorias (Sin gastos de riego).
+
+2 - Clima cálido y seco con poca lluvia, con el que se puede recogir $400Kg$ de tomates, $200Kg$ de patatas y $500Kg$ de Zanahorias. Gastos de riego: $6€/m^2$ por el tomate, $3€/m^2$ por la patata, $2€/m^2$ por la zanahoria. En este caso, el agricultor no aumentará el precio de vendita.
+
+3 - Clima cálido sin lluvia, con la que se puede recogir $300Kg$ de tomate, $200Kg$ de patatas y $400Kg$ de Zanahorias. Gastos de riego: $8€/m^2$ por el tomate, $4€/m^2$ por la patara, $3€/m^2$ por la zanahoria. En este caso, el agricultor aumentará el precio de CADA verdura en $1,5 €/Kg$ (para hacer frente a los costes de riego de las plantas).
+
+¿Qué semilla plantará el agricultor para maximizar las ganancias?
+
+```{r}
+tb01 =  crea.tablaX(vector_matporfilas = c(810,610,160, 
+                                   500,400,400,
+                                   700,200,350), numalternativas = 3, numestados = 3)
+tb01
+```
+
+```{r}
+solH = criterio.Hurwicz.General(tb01, alfa = 0.5, favorable = T)
+solH
+```
+
+Para alfa = 0.5, la alternativa óptima sería d4 (pondría una pastelería)
+
+```{r}
+solH1 = criterio.Hurwicz.General(tb01, alfa = 0.3, favorable = T)
+solH1
+```
+
+Para alfa = 0.3, la alternativa óptima sería d1 (pondría una tienda de animales)
+
+```{r}
+solH2 = criterio.Hurwicz.General(tb01, alfa = 0.7, favorable = T)
+solH2
+```
+
+Para alfa = 0.7, la alternativa óptima sería d4 (pondría una pastelería)
+
+```{r}
+Intervalo= Hurwicz.intervalos(tb01, favorable = T)
+```
+
+```{r}
+Intervalo
+```
