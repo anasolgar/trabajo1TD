@@ -81,6 +81,26 @@
 
  
 
+# Ejercicio 5 (Paula): 
+
+#Una wedding planner (Profesional que se dedica a asistir a un cliente con el diseño, planificación y gestión de su boda).
+#Le han contratado para una boda el 28 de febrero del 2021. La hacienda que han elegido los novios les da la opción de poder celebrar
+#la boda al aire libre o cubierto dentro de la hacienda o incluso ambas cosas, dependerá del tiempo meteorológico. 
+
+#-En el caso de que sea al aire libre: 
+
+#      - Si llueve, la wedding planner pierde 10.000 euros porque tiene que cancelar la boda.
+#      - Si está nublado, la wedding planner gana 20.000 euros ya que no se podrían realizar las fotos planeadas en el pack seleccionado. 
+#      -Si está soleado, la wedding planner gana 30.000 euros con el pack completo de boda planteado. 
+
+#- En el caso de que sea cubierto, hay menos capacidad para los invitados: 
+
+#     -Si llueve, la wedding planner gana 13.000 euros. 
+#     -Si está nublado, la wedding planner gana 10.000 euros porque puede realizar actividades fuera. 
+#    -Si está soleado, la wedding planner gana 25.000 euros ya que podría hacer el pack completo. 
+
+#¿Qué opción es mejor para la wedding planner? 
+
 
 
 
