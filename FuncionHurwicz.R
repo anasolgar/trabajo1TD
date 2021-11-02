@@ -273,8 +273,29 @@ Hurwicz.intervalos = function(tabla, favorable = TRUE){
     title("Criterio de Hurwicz (desfavorable - línea discontinua)")
   }
   
+  alfaCorte = round(alfaCorte, 3)
+  if (length(alfaCorte)==1){
+    Int1=paste("(",0,",",alfaCorte,")")
+    Int2=paste("(",alfaCorte,",",1,")")
+    Soluciones = cbind(c(Int1,Int2),c(Alt[1],Alt[2]))
+  } else {
+    Int0=paste("(",0,",",alfaCorte[1],")")
+    Int1=paste("(",alfaCorte[length(alfaCorte)],",",1,")")
+    Int = ""
+    Soluciones= c(Int0, Alt[1])
+    for (i in 1:(length(alfaCorte)-1)){
+      Int[i] = paste("(",alfaCorte[i],",",alfaCorte[i+1],")")
+      Soluciones = rbind(Soluciones,c(Int[i],Alt[i+1]))
+    }
+    Soluciones = rbind(Soluciones,c(Int1,Alt[length(Alt)]))
+  }
+  colnames(Soluciones)=c("Intervalo","Alternativa")
   
-  return(alfaCorte)
+  resultados = list();
+  resultados$AltOptimas = Alt;
+  resultados$PuntosDeCorte = alfaCorte;
+  resultados$IntervalosAlfa = Soluciones;
+  return(resultados)
 }
 
 
