@@ -50,21 +50,21 @@ solH = criterio.Hurwicz.General(tb01, alfa = 0.5, favorable = T)
 solH
 ```
 
-Para alfa = 0.5, la alternativa óptima sería d4 (pondría una pastelería)
+Para alfa = 0.5, la alternativa óptima sería d1 (Tomate)
 
 ```{r}
 solH1 = criterio.Hurwicz.General(tb01, alfa = 0.3, favorable = T)
 solH1
 ```
 
-Para alfa = 0.3, la alternativa óptima sería d1 (pondría una tienda de animales)
+Para alfa = 0.3, la alternativa óptima sería d2 (patata)
 
 ```{r}
 solH2 = criterio.Hurwicz.General(tb01, alfa = 0.7, favorable = T)
 solH2
 ```
 
-Para alfa = 0.7, la alternativa óptima sería d4 (pondría una pastelería)
+Para alfa = 0.7, la alternativa óptima sería d1 (patata)
 
 ```{r}
 Intervalo= Hurwicz.intervalos(tb01, favorable = T)
