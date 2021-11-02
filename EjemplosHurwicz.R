@@ -27,7 +27,6 @@
 
 
 
-=======
 #Ejercicio 2 (Alice)
 
 #La empresa S.T. se dedica a la fabricación y distribución de zapatillas. Tras los
@@ -60,5 +59,52 @@
 # 3 - Clima cálido sin lluvia, con la que se puede recogir 300Kg de tomate, 200Kg de patatas y 400Kg de Zanahorias. Gastos de riego: 3€/m^2 por el tomate, 1,5€/m^2 por la patara, 5€/m^2 por la zanahoria.
 # En este caso, el agricultor aumentará el precio de CADA verdura en 1,5 euro/Kg (para hacer frente a los costes de riego de las plantas).
 # ¿Qué semilla plantará el agricultor para maximizar las ganancias?
+
+
+# Ejercicio 4 (Fernando)
+
+# Una empresa constructora ha obtenido un beneficio mayor de lo esperado este año y ha decidido dedicar una parte de éste a invertir en el negocio.
+
+# El jefe está barajando la posibilidad de dirigir ese dinero a contratar personal, invertir en publicidad o mejorar las infraestructuras de la empresa. Un dato a tener en cuenta es que se cree que se avecina una nueva crisis de la construcción y ésta echaría a perder las inversiones realizadas.
+
+# Veamos cuánto dinero se estima que ganarán en el próximo año
+
+# - Si la empresa invierte en publicidad: ganará 15000 euros si no hay crisis, y 5000 euros si la hay.
+
+# - Si la empresa contrata nuevo personal: ganará 20000 euros en caso de no darse la crisis, per perderá 5000 euros en caso de que sí.
+
+# - Si invierten en infraestructuras: ganará 10000 euros si no hay crisis, y 9000 si sí la hay.
+
+ 
+
+#¿Qué inversión le hará ganar más dinero a la empresa en el próximo año?
+
+ 
+
+# Ejercicio 5 (Paula): 
+
+#Una wedding planner (Profesional que se dedica a asistir a un cliente con el diseño, planificación y gestión de su boda).
+#Le han contratado para una boda el 28 de febrero del 2021. La hacienda que han elegido los novios les da la opción de poder celebrar
+#la boda al aire libre o cubierto dentro de la hacienda o incluso ambas cosas, dependerá del tiempo meteorológico. 
+
+#-En el caso de que sea al aire libre: 
+
+#      - Si llueve, la wedding planner pierde 10.000 euros porque tiene que cancelar la boda.
+#      - Si está nublado, la wedding planner gana 20.000 euros ya que no se podrían realizar las fotos planeadas en el pack seleccionado. 
+#      -Si está soleado, la wedding planner gana 30.000 euros con el pack completo de boda planteado. 
+
+#- En el caso de que sea cubierto, hay menos capacidad para los invitados: 
+
+#     -Si llueve, la wedding planner gana 13.000 euros. 
+#     -Si está nublado, la wedding planner gana 10.000 euros porque puede realizar actividades fuera. 
+#    -Si está soleado, la wedding planner gana 25.000 euros ya que podría hacer el pack completo. 
+
+#¿Qué opción es mejor para la wedding planner? 
+
+
+
+
+
+
 
 
