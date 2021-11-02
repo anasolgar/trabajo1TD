@@ -212,10 +212,7 @@ Hurwicz.intervalos(tb05, favorable = F)
 #   }
 #   Soluciones = rbind(Soluciones,c(Int1,Alt[length(Alt)]))
 # }
-# rm(Soluciones)
-# a= c(1,2)
-# b=c(3,4)
-# cbind(a,b)
+
 
 
 ```
