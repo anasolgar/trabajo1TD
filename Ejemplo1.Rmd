@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ---
 title: "Ejemplo 1"
 author: "Ana Solís García"
