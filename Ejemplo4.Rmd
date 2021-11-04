@@ -50,6 +50,7 @@ sol4
 
 Función creada por el grupo:
 ```{r}
+
 Hurwicz.intervalos = function(tabla, favorable = TRUE){
   X = tabla # renombramos la tabla
   Altmin = apply(X,MARGIN=1,min)      # vector de minimos (por filas)
@@ -103,6 +104,7 @@ Hurwicz.intervalos = function(tabla, favorable = TRUE){
       alfaC = uniroot(pCorte, interval = c(0,1))$root[[1]] # Buscamos los 0 para cada funcion
       alfaCorte[i] = alfaC  # Almacenamos los valores de alfa para los que las rectas se cortan en alfaCorte
     }
+    print(paste("El valores de alfa que determina los intervalos dónde cambian las alternativas óptimas es:",alfaCorte[i]))
     
   }
   
@@ -113,7 +115,7 @@ Hurwicz.intervalos = function(tabla, favorable = TRUE){
   y0=y0-0.1*rg;y1=y1+0.1*rg;
   plot(c(x0,x1), c(y0,y1), type = "n", xlab = "alpha", ylab = "Criterio Hurwicz");
   nn = length(Altmin);
-  colores = rep("blue",nn)
+  colores = rainbow(nn) #aquí es donde estaba el fallo, por lo que salían todas las lineas azules.
   abline(v=0);
   abline(v=1);
   if (favorable) {
@@ -134,13 +136,36 @@ Hurwicz.intervalos = function(tabla, favorable = TRUE){
   abline(v = alfaCorte, col="red")
   
   if (favorable) {
+    legend("bottomright",legend=rownames(X),fill=colores,inset=0.05) #leyendas añadidas
     title("Criterio de Hurwicz (favorable - línea discontinua)")
   } else {
+    legend("topright",legend=rownames(X),fill=colores,inset=0.05) #leyendas añadidas
     title("Criterio de Hurwicz (desfavorable - línea discontinua)")
   }
   
+  alfaCorte = round(alfaCorte, 3)
+  if (length(alfaCorte)==1){
+    Int1=paste("(",0,",",alfaCorte,")")
+    Int2=paste("(",alfaCorte,",",1,")")
+    Soluciones = cbind(c(Int1,Int2),c(Alt[1],Alt[2]))
+  } else {
+    Int0=paste("(",0,",",alfaCorte[1],")")
+    Int1=paste("(",alfaCorte[length(alfaCorte)],",",1,")")
+    Int = ""
+    Soluciones= c(Int0, Alt[1])
+    for (i in 1:(length(alfaCorte)-1)){
+      Int[i] = paste("(",alfaCorte[i],",",alfaCorte[i+1],")")
+      Soluciones = rbind(Soluciones,c(Int[i],Alt[i+1]))
+    }
+    Soluciones = rbind(Soluciones,c(Int1,Alt[length(Alt)]))
+  }
+  colnames(Soluciones)=c("Intervalo","Alternativa")
   
-  return(alfaCorte)
+  resultados = list();
+  resultados$AltOptimas = Alt;
+  resultados$PuntosDeCorte = alfaCorte;
+  resultados$IntervalosAlfa = Soluciones;
+  return(resultados)
 }
 ```
 
@@ -149,7 +174,7 @@ Hurwicz.intervalos = function(tabla, favorable = TRUE){
 Hurwicz.intervalos(tabla4, favorable = TRUE)
 ```
 
-Por tanto un valor de alfa dentro del intervalo de alternativas óptimas para el método de Hurwicz sería alfa=0.5:
+Por tanto, para un valor de alfa=0.5:
 
 
 ```{r}
