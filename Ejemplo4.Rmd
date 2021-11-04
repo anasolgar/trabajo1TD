@@ -42,6 +42,19 @@ tabla4
 sol4 = criterio.Todos(tabla4, favorable = TRUE)
 sol4
 ```
+
+
+-   El *Criterio de Wald* nos dice que la alternativa óptima es invertir en infraestructuras.
+
+-   El *Criterio Optimista* se queda con la segunda alternativa: contratar nuevo personal.
+
+-   El *Criterio de Hurwicz* nos da como alternativa óptima invertir en infraestructuras.
+
+-   El *Criterio de Savage o Costes de oportunidad* nos elige la alternativa 1, es decir, invertir en publicidad*.*
+
+-   El *Criterio de Laplace* nos da como alternativa óptima invertir en publicidad*.*
+
+
  **Solución** 
  d3 y d1 aparecen 2 veces, y d2 sólo una vez. Nos quedamos con d1, es decir: la mejor opción
  será invertir en infraestructuras.
