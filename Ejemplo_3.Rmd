@@ -8,6 +8,7 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 source("FuncionHurwicz.R")
+source("teoriadecision_funciones_incertidumbre.R")
 ```
 
 # Ejemplo 3
@@ -46,6 +47,30 @@ tb01
 ```
 
 ```{r}
+Sol = criterio.Todos(tb01, alfa = 0.5, favorable = T)
+Sol
+```
+
+-   [*Criterio de Wald*]{.ul}: la alternativa óptima sería d1 (tienda de
+    animales)
+
+-   [*Criterio optimista*]{.ul}: la alternativa óptima es `d4`
+    (pastelería)
+
+-   [*Criterio de Hurwicz con alfa=0.5*]{.ul} : la alternativa óptima es
+    `d4` (pastelería)
+
+-   [*Criterio de Savage*]{.ul}: la alternativa óptima es `d1` (tienda
+    de animales)
+
+-   [*Criterio de Laplace*]{.ul}: las alternativas óptimas son `d1` y
+    `d4` (pastelería o tienda de animales)
+
+-   [*Criterio del Punto Ideal*]{.ul}: la alternativa óptima es `d1`
+    (tienda de animales)
+
+Vamos a aplicar el Criterio de Hurwicz para distintos valores de alfa:
+```{r}
 solH = criterio.Hurwicz.General(tb01, alfa = 0.5, favorable = T)
 solH
 ```
@@ -64,12 +89,12 @@ solH2 = criterio.Hurwicz.General(tb01, alfa = 0.7, favorable = T)
 solH2
 ```
 
-Para alfa = 0.7, la alternativa óptima sería d1 (patata)
+Para alfa = 0.7, la alternativa óptima sería d2 (patata)
+
+### FUNCION
 
 ```{r}
-Intervalo= Hurwicz.intervalos(tb01, favorable = T)
-```
-
-```{r}
+Intervalo = Hurwicz.intervalos(tb01, favorable = T)
 Intervalo
 ```
+
