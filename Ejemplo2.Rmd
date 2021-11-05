@@ -1,6 +1,17 @@
+------
 
-```{r}
 
+titolo : " Esemplo 2 "
+autore : " Alice Lener "
+data : " 1/11/2021 "
+output : html_document
+editor_options :
+  sconto :
+    avvolgere : 72
+---
+
+```{r setup, include = FALSE}
+knitr :: opts_chunk $ set ( ECHO  =  TRUE )
 source("aiuto.R")
 source("FuncionHurwicz.R")
 
