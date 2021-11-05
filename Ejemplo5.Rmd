@@ -2,13 +2,19 @@
 title: "Ejemplo 5"
 author: "Paula Gutierrez Sanchez"
 date: "29/10/2021"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 source("teoriadecision_funciones_incertidumbre.R")
+source("FuncionHurwicz.R")
 ```
+
+
+# Ejercicio 5 
 
 Una wedding planner (Profesional que se dedica a asistir a un cliente con el diseño, planificación y gestión de su boda). Le han contratado para una boda el 28 de febrero del 2021. La hacienda que han elegido los novios les da la opción de poder celebrar la boda al aire libre o cubierto dentro de la hacienda o incluso ambas cosas, dependerá del tiempo meteorológico. 
 -En el caso de que sea al aire libre: 
@@ -27,10 +33,31 @@ tb05 = crea.tablaX(c(-10000,20000,30000,
 tb05
 ```
 ```{r}
+sol = criterio.Todos(tb05,alfa = 0.5,favorable = TRUE)
+sol
+```
+
+Para el **criterio de Wald** la mejor alternativa es la d2 que en este caso es hacer la boda en una zona cubierta. 
+
+Para el **criterio Optimista** la mejor alternativa es la d1 que es en este caso hacer la boda al aire libre.
+
+Para el **criterio de Hurwicz** la mejor alternativa es la d2 que en este caso es ahcer la boda en una zona cubierta. 
+
+Para el **criterio de Savage** la mejor alternativa es la d2 que es en este caso hacer la boda en una zona cubierta. 
+
+Para el **criterio de Laplace** la mejor alternativa es la d2 que es en este caso hacer la boda en una zona cubierta. 
+
+Para el **criterio de Punto Ideal ** la mejor alternativa es la d2 que es en este caso hacer la boda en una zona cubierta. 
+
+
+Aplicamos el criterio de Hurwicz: 
+
+```{r}
 sol05H = criterio.Hurwicz.General(tb05,alfa = 0.5,favorable = TRUE)
 sol05H
 ```
-Para alfa = 0.5, la alternativa óptima sería d2 (Cubierto). 
+Para alfa = 0.5, la alternativa óptima sería d2 (Cubierto).
+
 ```{r}
 sol05H1 = criterio.Hurwicz.General(tb05,alfa = 0.9,favorable = TRUE)
 sol05H1
@@ -38,9 +65,23 @@ sol05H1
 Para alfa = 0.9, la alternativa óptima seria d1 (Aire libre).
 
 ```{r}
+sol05H2 = criterio.Hurwicz.General(tb05,alfa = 0.7,favorable = TRUE)
+sol05H2
+```
+Para alfa = 0.8, la alternativa óptima seria d2 (Cubierto).
+
+```{r}
 Intervalo = Hurwicz.intervalos(tb05,favorable = TRUE)
 ```
+Como podemos observar en el gráfico, el punto que corta las dos rectas es cuando alpha vale 0.8. 
 ```{r}
 Intervalo
 ```
+Los valores de α que determinan los intervalos dónde cambian las alternativas óptimas en este caso seria 0.8. 
+
+El intervalo para la alternativa d1 que es en este caso al aire libre es : 
+(0.8,1), esto quiere decir que cuando alpha este dentro de este intervalo la mejor alternativa va a ser d1, al aire libre. 
+
+El intervalo para la alternativa d2 que es en este caso cubierto es : 
+(0,0.8), esto quiere decir que cuando alpha este dentro de este intervalo la mejor alternativa va a ser d2, cubierto. 
 
