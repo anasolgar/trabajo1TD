@@ -87,93 +87,6 @@ dibuja.criterio.Hurwicz = function(tablaX,favorable=TRUE){
 
 }
 
-source("teoriadecision_funciones_incertidumbre.R")
-# criterio.Hurwicz = function(tablaX,alfa=0.3,favorable=TRUE) {
-#   # alfa es un escalar entre 0 y 1 lo obtiene para ese único valor
-#   X = tablaX;
-#   if (favorable) {
-#     Altmin = apply(X,MARGIN=1,min);
-#     Altmax= apply(X,MARGIN=1,max);
-#     AltH = alfa * Altmax + (1-alfa) * Altmin 
-#     Hurwicz = max(AltH)
-#     Alt_Hurwicz = which.max.general(AltH)
-#     metodo = 'favorable';
-#   } else {
-#     Altmin = apply(X,MARGIN=1,min);
-#     Altmax= apply(X,MARGIN=1,max);
-#     AltH = (1-alfa) * Altmax + alfa * Altmin 
-#     Hurwicz = min(AltH)
-#     Alt_Hurwicz = which.min.general(AltH)
-#     metodo = 'desfavorable';
-#   }
-#   resultados = list();
-#   resultados$criterio = 'Hurwicz';
-#   resultados$alfa = alfa;
-#   resultados$metodo = metodo;
-#   resultados$tablaX = tablaX;
-#   resultados$ValorAlternativas = AltH;
-#   resultados$ValorOptimo = Hurwicz;
-#   resultados$AlternativaOptima = Alt_Hurwicz;
-#   
-#   return(resultados);
-#   
-# }
-# 
-# 
-# 
-# dibuja.criterio.Hurwicz = function(tablaX,favorable=TRUE){
-#   X = tablaX;
-#   Altmin = apply(X,MARGIN=1,min);
-#   Altmax = apply(X,MARGIN=1,max);
-#   valfa = seq(from=0,to=1,by=0.05);
-#   vHurwicz = rep(0,length(valfa));
-#   Alt_vHurwicz = rep(0,length(valfa));
-#   for (i in 1:length(valfa)) {
-#     alfab = valfa[i];  
-#     if (favorable) { 
-#       vAltH = alfab * Altmax + (1-alfab) * Altmin; 
-#       vHurwicz[i] = max(vAltH)
-#     } else {
-#       vAltH = alfab * Altmin + (1-alfab) * Altmax; 
-#       vHurwicz[i] = min(vAltH)      
-#       }
-#     }
-#   x0=0;x1=1;
-#   y0 = min(Altmin);
-#   y1 = max(Altmax);
-#   rg = y1-y0;
-#   y0=y0-0.1*rg;y1=y1+0.1*rg;
-#   plot(c(x0,x1), c(y0,y1), type = "n", xlab = "alpha", ylab = "Criterio Hurwicz"); 
-#   nn = length(Altmin);
-#   colores = rainbow(nn);
-#   abline(v=0);
-#   abline(v=1);
-#   if (favorable) {
-#     for (i in 1:nn) {
-#       aa = Altmin[i];
-#       bb = (Altmax[i] - Altmin[i]);
-#       abline(a=aa,b=bb,col=colores[i]);
-#     }
-#   } else {
-#     for (i in 1:nn) {
-#       aa = Altmax[i];
-#       bb = (Altmin[i] - Altmax[i]);
-#       abline(a=aa,b=bb,col=colores[i]);
-#     }        
-#   }
-#   lines(valfa,vHurwicz,col=rainbow(nn+1)[nn+1],lty=3,lwd=3)
-#   if (favorable) {
-#     legend("bottomright",legend=rownames(X),fill=colores,inset=0.05)
-#     title("Criterio de Hurwicz (favorable - línea discontinua)")
-#   } else {
-#     legend("topright",legend=rownames(X),fill=colores,inset=0.05)
-#     title("Criterio de Hurwicz (desfavorable - línea discontinua)")    
-#   }
-# 
-# }
-
-
-
 
 # FUNCION : esta funcion nos da los avlores de alfa para los que las alternativas cambian 
 
@@ -244,7 +157,7 @@ Hurwicz.intervalos = function(tabla, favorable = TRUE){
   y0=y0-0.1*rg;y1=y1+0.1*rg;
   plot(c(x0,x1), c(y0,y1), type = "n", xlab = "alpha", ylab = "Criterio Hurwicz");
   nn = length(Altmin);
-  colores = rep("blue",nn)
+  colores = rainbow(nn) #aquí es donde estaba el fallo, por lo que salían todas las lineas azules.
   abline(v=0);
   abline(v=1);
   if (favorable) {
@@ -265,13 +178,36 @@ Hurwicz.intervalos = function(tabla, favorable = TRUE){
   abline(v = alfaCorte, col="red")
   
   if (favorable) {
+    legend("bottomright",legend=rownames(X),fill=colores,inset=0.05) #leyendas añadidas
     title("Criterio de Hurwicz (favorable - línea discontinua)")
   } else {
+    legend("topright",legend=rownames(X),fill=colores,inset=0.05) #leyendas añadidas
     title("Criterio de Hurwicz (desfavorable - línea discontinua)")
   }
   
+  alfaCorte = round(alfaCorte, 3)
+  if (length(alfaCorte)==1){
+    Int1=paste("(",0,",",alfaCorte,")")
+    Int2=paste("(",alfaCorte,",",1,")")
+    Soluciones = cbind(c(Int1,Int2),c(Alt[1],Alt[2]))
+  } else {
+    Int0=paste("(",0,",",alfaCorte[1],")")
+    Int1=paste("(",alfaCorte[length(alfaCorte)],",",1,")")
+    Int = ""
+    Soluciones= c(Int0, Alt[1])
+    for (i in 1:(length(alfaCorte)-1)){
+      Int[i] = paste("(",alfaCorte[i],",",alfaCorte[i+1],")")
+      Soluciones = rbind(Soluciones,c(Int[i],Alt[i+1]))
+    }
+    Soluciones = rbind(Soluciones,c(Int1,Alt[length(Alt)]))
+  }
+  colnames(Soluciones)=c("Intervalo","Alternativa")
   
-  return(alfaCorte)
+  resultados = list();
+  resultados$AltOptimas = Alt;
+  resultados$PuntosDeCorte = alfaCorte;
+  resultados$IntervalosAlfa = Soluciones;
+  return(resultados)
 }
 
 
