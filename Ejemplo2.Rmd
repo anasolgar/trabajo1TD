@@ -1,7 +1,7 @@
-------
+---
 
 
-titolo : " Esemplo 2 "
+titolo : " Ejemplo 2 "
 autore : " Alice Lener "
 data : " 1/11/2021 "
 output : html_document
