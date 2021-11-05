@@ -1,94 +1,10 @@
 ###### Función para aplicar el Método de Hurwicz que nos permita obtener los valores de alpha para los que cambian las alternativas óptimas
 
-## Funciones que vamos a utilizar del fichero "teoriadecision_funciones_incertidumbre.R" (he copiado y pegado)
+## Funciones que vamos a utilizar del fichero "teoriadecision_funciones_incertidumbre.R" 
 
-source("teoriadecison_funciones_incertidumbre.R")
-criterio.Hurwicz = function(tablaX,alfa=0.3,favorable=TRUE) {
-  # alfa es un escalar entre 0 y 1 lo obtiene para ese único valor
-  X = tablaX;
-  if (favorable) {
-    Altmin = apply(X,MARGIN=1,min);
-    Altmax= apply(X,MARGIN=1,max);
-    AltH = alfa * Altmax + (1-alfa) * Altmin 
-    Hurwicz = max(AltH)
-    Alt_Hurwicz = which.max.general(AltH)
-    metodo = 'favorable';
-  } else {
-    Altmin = apply(X,MARGIN=1,min);
-    Altmax= apply(X,MARGIN=1,max);
-    AltH = (1-alfa) * Altmax + alfa * Altmin 
-    Hurwicz = min(AltH)
-    Alt_Hurwicz = which.min.general(AltH)
-    metodo = 'desfavorable';
-  }
-  resultados = list();
-  resultados$criterio = 'Hurwicz';
-  resultados$alfa = alfa;
-  resultados$metodo = metodo;
-  resultados$tablaX = tablaX;
-  resultados$ValorAlternativas = AltH;
-  resultados$ValorOptimo = Hurwicz;
-  resultados$AlternativaOptima = Alt_Hurwicz;
-  
-  return(resultados);
-  
-}
+source("teoriadecision_funciones_incertidumbre.R")
 
-
-
-dibuja.criterio.Hurwicz = function(tablaX,favorable=TRUE){
-  X = tablaX;
-  Altmin = apply(X,MARGIN=1,min);
-  Altmax = apply(X,MARGIN=1,max);
-  valfa = seq(from=0,to=1,by=0.05);
-  vHurwicz = rep(0,length(valfa));
-  Alt_vHurwicz = rep(0,length(valfa));
-  for (i in 1:length(valfa)) {
-    alfab = valfa[i];  
-    if (favorable) { 
-      vAltH = alfab * Altmax + (1-alfab) * Altmin; 
-      vHurwicz[i] = max(vAltH)
-    } else {
-      vAltH = alfab * Altmin + (1-alfab) * Altmax; 
-      vHurwicz[i] = min(vAltH)      
-      }
-    }
-  x0=0;x1=1;
-  y0 = min(Altmin);
-  y1 = max(Altmax);
-  rg = y1-y0;
-  y0=y0-0.1*rg;y1=y1+0.1*rg;
-  plot(c(x0,x1), c(y0,y1), type = "n", xlab = "alpha", ylab = "Criterio Hurwicz"); 
-  nn = length(Altmin);
-  colores = rainbow(nn);
-  abline(v=0);
-  abline(v=1);
-  if (favorable) {
-    for (i in 1:nn) {
-      aa = Altmin[i];
-      bb = (Altmax[i] - Altmin[i]);
-      abline(a=aa,b=bb,col=colores[i]);
-    }
-  } else {
-    for (i in 1:nn) {
-      aa = Altmax[i];
-      bb = (Altmin[i] - Altmax[i]);
-      abline(a=aa,b=bb,col=colores[i]);
-    }        
-  }
-  lines(valfa,vHurwicz,col=rainbow(nn+1)[nn+1],lty=3,lwd=3)
-  if (favorable) {
-    legend("bottomright",legend=rownames(X),fill=colores,inset=0.05)
-    title("Criterio de Hurwicz (favorable - línea discontinua)")
-  } else {
-    legend("topright",legend=rownames(X),fill=colores,inset=0.05)
-    title("Criterio de Hurwicz (desfavorable - línea discontinua)")    
-  }
-
-}
-
-
-# FUNCION : esta funcion nos da los avlores de alfa para los que las alternativas cambian 
+# FUNCION : esta funcion nos da los valores de alfa para los que las alternativas cambian 
 
 # Entrada: Tabla, favorable (T/F)
 # Salida: Intervalo -> Alternativa (óptima para ese intervalo de alfa)
@@ -219,3 +135,4 @@ tb05 = crea.tablaX(c(125,120,156,60,130,80), numalternativas = 3, numestados = 2
 tb05
 Hurwicz.intervalos(tb07, favorable = T)
 Hurwicz.intervalos(tb05, favorable = F)
+

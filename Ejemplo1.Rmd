@@ -2,15 +2,17 @@
 title: "Ejemplo 1"
 author: "Ana Solís García"
 date: "1/11/2021"
-output: html_document
-editor_options: 
-  markdown: 
+output:
+  pdf_document: default
+  html_document: default
+editor_options:
+  markdown:
     wrap: 72
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-source("teoriadecison_funciones_incertidumbre.R")
+source("teoriadecision_funciones_incertidumbre.R")
 source("FuncionHurwicz.R")
 ```
 
