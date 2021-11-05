@@ -1,0 +1,117 @@
+---
+title: "Ejemplo2"
+author: "AliceLener"
+date: "5/11/2021"
+output: html_document
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+source("aiuto.R")
+source("FuncionHurwicz.R")
+```
+
+# Ejemplo 2
+
+## Enunciado
+
+
+
+La empresa S.T. se dedica a la fabricación y distribución de zapatillas. Tras los
+beneficios el año pasado, decide ampliar su oferta de mercado, pero duda con qué producto. 
+Las alternativas son: formadores, botas y tacones. 
+Para decantarse por uno u otro producto observará los  beneficios (al mes) que genera cada
+opción y éstos dependerán de que la empresa firme un acuerdo con  distribuidoras A , B o C. 
+Los costes esperados son los siguientes:
+Si se firma el acuerdo con distribudoras A los beneficios de los formadores
+ botas y tacones respectivamente son: 2000 €, 1800€ y 2300€.
+Si  se firma el acuerdo con distribudoras B los beneficios de los formadores, botas y tacones
+respectivamente son: 1100 €, 500€ y 1000€.
+Si la empresa acepta firmar el acuerdo C los beneficios de los formadores, botas y tacones
+respectivamente son: 1900 €, 1500€ y 2700€.
+¿con qué opción se beneficiará más la empresa?
+
+
+
+
+```{r}
+tb02 =  crea.tablaX(vector_matporfilas = c( 2000 , 1800 , 2300 ,
+                                            1100 , 500 , 1000 ,
+                                            1900 , 1500 , 2700 ), numalternativas = 3, numestados = 3)
+tb02
+```
+
+
+
+
+Tenemos que aplicar todos los criterios a esta tabla:
+
+```{r}
+Sol = criterio.Todos(tb02, alfa = 0.5, favorable = T)
+Sol
+```
+- Por el Criterio de Wald: la alternativa óptima sería d1 (formadores)
+
+- Por el Criterio optimista : la alternativa óptima es `d3`
+    (tacones)
+
+- Por el Criterio de Hurwicz con alfa=0.5 : la alternativa óptima es`d3` (tacones)
+
+- Por el Criterio de Savage: la alternativa óptima es `d3` (tacones)
+
+- Por el Criterio de Laplace : las alternativas óptimas son `d1` y `d3` (formadores y tacones)
+
+- Por el Criterio del Punto Ideal: la alternativa óptima es `d3` (tacones)
+
+
+
+
+
+
+Ahora vamos a aplicar el Criterio de Hurwicz para distintos valores de alfa:
+
+```{r}
+solH = criterio.Hurwicz.General(tb02, alfa = 0.5, favorable = T)
+solH
+```
+
+Para alfa = 0.5, la alternativa óptima sería `d3`(tacones)
+
+```{r}
+solH1 = criterio.Hurwicz.General(tb02, alfa = 0.3, favorable = T)
+solH1
+```
+
+Para alfa = 0.3, la alternativa óptima sería `d1`(formadores)
+
+```{r}
+solH2 = criterio.Hurwicz.General(tb02, alfa = 0.7, favorable = T)
+solH2
+```
+
+Para alfa = 0.7, la alternativa óptima sería `d3`(tacones)
+
+**Solución** 
+ d3 aparecen 2 veces y d1 una vez. Nos quedamos con d3, es decir: la empresa se
+ beneficiarà mas con tacones.
+
+
+
+#FUNCION DE EL GRUPO
+
+```{r}
+Intervalo= Hurwicz.intervalos(tb02, favorable = T)
+```
+
+Como podemos observar en el gráfico, el punto que corta las dos rectas es cuando alpha vale 0.429
+
+
+```{r}
+Intervalo
+```
+Los valores de alpha que determinan los intervalos dónde cambian las alternativas óptimas en este caso seria 0.429. 
+
+El intervalo para la alternativa d1 que es formadores es : 
+(0,0.429), esto quiere decir que cuando alpha es dentro de este intervalo la mejor alternativa va a ser d1
+
+El intervalo para la alternativa d3 que es tacones es : 
+(0.429, 1), esto quiere decir que cuando alpha es dentro de este intervalo la mejor alternativa va a ser d3

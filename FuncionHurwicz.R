@@ -4,6 +4,7 @@
 
 source("teoriadecision_funciones_incertidumbre.R")
 
+
 # FUNCION : esta funcion nos da los valores de alfa para los que las alternativas cambian 
 
 # Entrada: Tabla, favorable (T/F)
