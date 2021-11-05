@@ -98,7 +98,7 @@ Para alfa = 0.7, la alternativa óptima sería `d3`(tacones)
 
 
 
-### FUNCION
+#FUNCION DE EL GRUPO
 
 ```{r}
 Intervalo= Hurwicz.intervalos(tb01, favorable = T)
