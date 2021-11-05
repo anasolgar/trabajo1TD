@@ -1,13 +1,10 @@
----
-title: "Ejemplo 2"
-author: "Alice Lener"
-date: "2/11/2021"
-output: html_document
----
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r}
+
+source("aiuto.R")
 source("FuncionHurwicz.R")
+
+
 ```
 
 # Ejemplo 2
@@ -104,3 +101,4 @@ Para alfa = 0.7, la alternativa óptima sería `d3`(tacones)
 Intervalo= Hurwicz.intervalos(tb01, favorable = T)
 Intervalo
 ```
+
