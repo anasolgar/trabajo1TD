@@ -15,7 +15,7 @@ source("teoriadecision_funciones_incertidumbre.R")
 
 ## Enunciado
 
-Un agricoltor tiene que elegir cuál semilla plantear entre tomate, patata y zanahoria. Los precios de ventea son respectivamente:
+Un agricoltor tiene que elegir cuál semilla plantear entre tomate (d1), patata (d2), zanahoria (d3) y lechuga (d4). Los precios de ventea son respectivamente:
 
 -   $5€/Kg$
 
@@ -23,26 +23,32 @@ Un agricoltor tiene que elegir cuál semilla plantear entre tomate, patata y zan
 
 -   $2€/Kg$
 
+-   $4€/Kg$
+
 Los costes de preparación de la tierra y de las semilla son:
 
 -   $190€$ para el tomate
 
+-   $250€$ para la lechuga
+
 -   $300€$ para las verduras que crecen bajo tierra (patata y zanahorias)
 
-Sabiendo que el campo se siembra de manera diferente según la hortaliza (es necesario emplear $200 m^2$ por el tomate, $300 m^2$ por las patatas y $250 m^2$ por la zanahoria) y que, a diferencia de las condiciones climáticas, se pueden cosechar distintas cantidades de hortalizas:
+Sabiendo que el campo se siembra de manera diferente según la hortaliza (es necesario emplear $200 m^2$ por el tomate, $300 m^2$ por las patatas y $250 m^2$ por la zanahoria y $400 m^2$ por la lechuga) y que, a diferencia de las condiciones climáticas, se pueden cosechar distintas cantidades de hortalizas:
 
-1 - Clima cálido y húmedo con lluvias frecuentes, con el que se puede recogir $200Kg$ de tomates, $100Kg$ de patatas y $500Kg$ de zanahorias (Sin gastos de riego).
+1.  Clima cálido y húmedo con lluvias frecuentes (e1), con el que se puede recogir $150Kg$ de tomates, $100Kg$ de patatas, $500Kg$ de zanahorias y $50Kg$ de lechuga (Sin gastos de riego).
 
-2 - Clima cálido y seco con poca lluvia, con el que se puede recogir $400Kg$ de tomates, $200Kg$ de patatas y $500Kg$ de Zanahorias. Gastos de riego: $6€/m^2$ por el tomate, $3€/m^2$ por la patata, $2€/m^2$ por la zanahoria. En este caso, el agricultor no aumentará el precio de vendita.
+2.  Clima cálido y seco con poca lluvia (e2), con el que se puede recogir $400Kg$ de tomates, $200Kg$ de patatas, $500Kg$ de Zanahorias y $280Kg$ de lechuga. Gastos de riego: $6€/m^2$ por el tomate, $3€/m^2$ por la patata, $2€/m^2$ por la zanahoria y $1€/m^2$ por la lechuga . En este caso, el agricultor no puede aumentar el precio de ventea.
 
-3 - Clima cálido sin lluvia, con la que se puede recogir $300Kg$ de tomate, $200Kg$ de patatas y $400Kg$ de Zanahorias. Gastos de riego: $8€/m^2$ por el tomate, $4€/m^2$ por la patara, $3€/m^2$ por la zanahoria. En este caso, el agricultor aumentará el precio de CADA verdura en $1,5 €/Kg$ (para hacer frente a los costes de riego de las plantas).
+3.  Clima cálido y seco sin lluvia (e3), con la que se puede recogir $300Kg$ de tomate, $200Kg$ de patatas, $400Kg$ de Zanahorias y $300Kg$ de lechuga. Gastos de riego: $8€/m^2$ por el tomate, $4€/m^2$ por la patata, $3€/m^2$ por la zanahoria y $1.5€/m^2$ por la lechuga. En este caso, el agricultor aumentará el precio de CADA verdura en $1,5 €/Kg$ (para hacer frente a los costes de riego de las plantas).
 
 ¿Qué semilla plantará el agricultor para maximizar las ganancias?
 
 ```{r}
-tb01 =  crea.tablaX(vector_matporfilas = c(810,610,160, 
-                                   500,400,400,
-                                   700,200,350), numalternativas = 3, numestados = 3)
+tb01 =  crea.tablaX(vector_matporfilas = c(
+  5*150 - 190,5*400 - (190+6*200),6.5*300 - (190+8*200), 
+  8*100 - 300,8*200 - (300+3*300),9.5*200 - (300+4*300),
+  2*500 - 300,2*500 - (300+2*250),3.5*400 - (300+3*250),
+  4*50 - 250,4*280 - (250+1*400),5.5*300 - (250+1.5*400)), numalternativas = 4, numestados = 3)
 tb01
 ```
 
@@ -51,45 +57,40 @@ Sol = criterio.Todos(tb01, alfa = 0.5, favorable = T)
 Sol
 ```
 
--   [*Criterio de Wald*]{.ul}: la alternativa óptima sería d1 (tienda de
-    animales)
+-   [*Criterio de Wald*]{.ul}: la alternativa óptima sería `d2` (patata)
 
--   [*Criterio optimista*]{.ul}: la alternativa óptima es `d4`
-    (pastelería)
+-   [*Criterio optimista*]{.ul}: la alternativa óptima es `d4` (lechuga)
 
--   [*Criterio de Hurwicz con alfa=0.5*]{.ul} : la alternativa óptima es
-    `d4` (pastelería)
+-   [*Criterio de Hurwicz con alfa=0.5*]{.ul} : la alternativa óptima es `d2` y `d3` (patata y zanahoria)
 
--   [*Criterio de Savage*]{.ul}: la alternativa óptima es `d1` (tienda
-    de animales)
+-   [*Criterio de Savage*]{.ul}: la alternativa óptima es `d2` (patata)
 
--   [*Criterio de Laplace*]{.ul}: las alternativas óptimas son `d1` y
-    `d4` (pastelería o tienda de animales)
+-   [*Criterio de Laplace*]{.ul}: las alternativas óptimas son `d1` (tomate)
 
--   [*Criterio del Punto Ideal*]{.ul}: la alternativa óptima es `d1`
-    (tienda de animales)
+-   [*Criterio del Punto Ideal*]{.ul}: la alternativa óptima es `d2` (patata)
 
 Vamos a aplicar el Criterio de Hurwicz para distintos valores de alfa:
+
 ```{r}
-solH = criterio.Hurwicz.General(tb01, alfa = 0.5, favorable = T)
+solH = criterio.Hurwicz.General(tb01, alfa = 0.4, favorable = T)
 solH
 ```
 
-Para alfa = 0.5, la alternativa óptima sería d1 (Tomate)
+Para alfa = 0.4, la alternativa óptima sería `d2` (patata)
 
 ```{r}
-solH1 = criterio.Hurwicz.General(tb01, alfa = 0.3, favorable = T)
+solH1 = criterio.Hurwicz.General(tb01, alfa = 0.6, favorable = T)
 solH1
 ```
 
-Para alfa = 0.3, la alternativa óptima sería d2 (patata)
+Para alfa = 0.6, la alternativa óptima sería d3 (zanahoria)
 
 ```{r}
-solH2 = criterio.Hurwicz.General(tb01, alfa = 0.7, favorable = T)
+solH2 = criterio.Hurwicz.General(tb01, alfa = 0.8, favorable = T)
 solH2
 ```
 
-Para alfa = 0.7, la alternativa óptima sería d2 (patata)
+Para alfa = 0.8, la alternativa óptima sería d4 (patata)
 
 ### FUNCION
 
@@ -97,4 +98,3 @@ Para alfa = 0.7, la alternativa óptima sería d2 (patata)
 Intervalo = Hurwicz.intervalos(tb01, favorable = T)
 Intervalo
 ```
-
